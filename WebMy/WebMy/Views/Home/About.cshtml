@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+</head>
+<body>
+
+    <div>
+        
+        <label >Name:</label>
+        <input type="text" id="Name" />
+        <br/>             
+        <br/>
+        <label >Surname:</label>
+        <input type="text" id="Surname" />
+        <br/>
+       
+        <input class="submit" type="button" onclick="submit()" value="push"/>
+        <p id="Out"></p>
+
+
+        <script type="text/javascript">            
+            var ajx = new XMLHttpRequest();                
+                ajx.onreadystatechange = function () {
+                    if (ajx.readyState == 4) {
+                        if (ajx.status == 200) {
+                            document.getElementById("Out").innerHTML = ajx.responseText;
+                        }
+                    }
+                };
+
+                function submit() {                   
+                    ajx.open("POST","/Home/Index", true);
+                    ajx.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    ajx.send("Name=" + document.getElementById("Name").value + "&Surname=" + document.getElementById("Surname").value);
+                }
+            
+        </script>
+        <style>
+            label {
+                width: 100px; 
+                text-align: right;
+                float: left;
+                margin-right: 10px;
+                line-height: 30px;
+            }
+
+            .submit {
+                width: 100px;
+                margin-top: 10px;
+            }
+        </style>
+    </div>
+</body>
+</html>
